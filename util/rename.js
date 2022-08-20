@@ -1,4 +1,4 @@
-const srcPath = 'C:/Users/fangchaogao/Desktop/x/'
+const srcPath = 'C:/Users/Desktop/x/'
 const fs = require('fs')
 
 const files = fs.readdirSync(srcPath);
