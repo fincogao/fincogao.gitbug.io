@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+  <head>
+    <title>别踩鸡块</title>
+    <script>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?3db8c73595fdc893087a4de7e8f0e34e";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+    <script src="public/script/jquery-3.6.1.min.js"></script>
+    <style>
+      #main {
+        width: 90vw;
+        height: 90vh;
+        border: 1px solid black;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+      }
+
+      #container {
+        width: 100%;
+        height: 90vh;
+        position: relative;
+        top: -10vh;
+        background: white;
+      }
+
+      .row {
+        width: 90vw;
+        height: 15vh;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .cell {
+        width: 18vw;
+        height: 15vh;
+        float: left;
+        border: 1px solid black;
+      }
+
+      .black {
+        background-image: url("public/img/g1.jpg");
+        background-size: 100% 100%;
+      }
+
+      .red {
+        background-color: red;
+      }
+
+      .black-down {
+        background-image: url("public/img/g2.jpg");
+        background-size: 100% 100%;
+      }
+
+      .score {
+        text-align: center;
+        font-size: 3vw;
+      }
+
+      #popup {
+        width: 70vw;
+        height: 30vh;
+        margin: 0 auto;
+        position: absolute;
+        background: #666666;
+        top: 30vh;
+        left: 15vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+
+      .btn {
+        width: 50vw;
+        height: 4vh;
+        background: #99cc33;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3vw;
+      }
+
+      .white {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="score" id="time">倒计时 <span id="seconds">20</span></h1>
+    <h1 class="score">得分 <span id="score">0</span></h1>
+    <div id="main">
+      <div id="container"></div>
+    </div>
+    <div id="popup">
+      <h1 class="score white" id="final_display" hidden>
+        您的得分为：<span id="final_score">0</span>
+      </h1>
+      <div class="btn white" id="start">点击开始</div>
+      <div class="btn white" id="type">计时模式</div>
+      <div class="btn white" id="home">返回主页</div>
+    </div>
+    <audio id="adown" src="public/audio/鸡.mp3" hidden></audio>
+    <audio id="aend" src="public/audio/你干嘛哎呦.mp3" hidden></audio>
+    <div class="score">
+      © 2022 Copyright:
+      <a href="/"> ikun.life</a>
+    </div>
+    <div class="container" style="margin-top: 100px">
+      <div id="disqus_thread"></div>
+      <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+        (function () {
+          // DON'T EDIT BELOW THIS LINE
+          var d = document,
+            s = d.createElement("script");
+          s.src = "https://ikun-life.disqus.com/embed.js";
+          s.setAttribute("data-timestamp", +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+      <noscript
+        >Please enable JavaScript to view the
+        <a href="https://disqus.com/?ref_noscript"
+          >comments powered by Disqus.</a
+        ></noscript
+      >
+    </div>
+  </body>
+  <script>
+    var seconds = 20;
+    var score = 0;
+    var timer;
+    var type = "time";
+
+    $("#start").click(function () {
+      init();
+      $("#popup").hide();
+      if (type == "time") {
+        timer = setInterval(function () {
+          seconds--;
+          if (seconds < 1) {
+            end();
+          } else {
+            $("#seconds").html(seconds);
+            $("#score").html(score);
+          }
+        }, 1000);
+      }
+    });
+
+    $("#type").click(function () {
+      if (type == "time") {
+        $("#type").html("无限模式");
+        type = "infinite";
+        $("#time").hide();
+      } else {
+        $("#type").html("计时模式");
+        type = "time";
+        $("#time").show();
+      }
+    });
+
+    $("#home").click(function () {
+      window.location = "index.html";
+    });
+
+    function mv() {
+      $("#adown").trigger("play");
+      crow();
+      drow();
+      judge($(this));
+    }
+
+    function init() {
+      $("#container").empty();
+      for (var i = 0; i < 6; i++) {
+        crow();
+      }
+      seconds = 20;
+      score = 0;
+      $("#seconds").html(seconds);
+      $("#score").html(score);
+    }
+
+    function end() {
+      $("#aend").trigger("play");
+      $("#final_display").show();
+      $("#popup").show();
+      clearInterval(timer);
+      $("#final_score").html(score);
+      $("#seconds").html(seconds);
+      $("#start").html("重新开始");
+    }
+
+    function judge(el) {
+      if (el.hasClass("black")) {
+        el.removeClass("black");
+        el.addClass("black-down");
+        score++;
+        $("#score").html(score);
+      } else {
+        el.addClass("red");
+        end();
+      }
+
+      if ($("#container").find(".row:last-child").find(".black").length > 0) {
+        end();
+      }
+    }
+
+    function addClick() {
+      $(".cell").unbind();
+      $(".cell").on("click", mv);
+    }
+
+    function crow() {
+      var con = $("#container");
+      var row = cdiv("row");
+      var classes = createSn();
+
+      for (var i = 0; i < 5; i++) {
+        row.append(cdiv(classes[i]));
+      }
+      con.prepend(row);
+      addClick();
+    }
+
+    function drow() {
+      var con = $("#container");
+      console.log(con.children().length);
+      if (con.children().length > 7) {
+        $("#container").find(".row:last-child").remove();
+      }
+    }
+
+    function cdiv(className) {
+      var div = document.createElement("div");
+      div.className = className;
+      return div;
+    }
+
+    function createSn() {
+      var arr = ["cell", "cell", "cell", "cell", "cell"];
+      var i = Math.floor(Math.random() * 5);
+      arr[i] = "cell black";
+      return arr;
+    }
+  </script>
+</html>
