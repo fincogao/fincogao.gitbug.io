@@ -14,8 +14,8 @@
     <script src="public/script/jquery-3.6.1.min.js"></script>
     <style>
       #main {
-        width: 90vw;
-        height: 90vh;
+        width: 88vw;
+        height: 75vh;
         border: 1px solid black;
         margin: 0 auto;
         position: relative;
@@ -24,21 +24,21 @@
 
       #container {
         width: 100%;
-        height: 90vh;
+        height: 75vh;
         position: relative;
         top: -10vh;
         background: white;
       }
 
       .row {
-        width: 90vw;
+        width: 88vw;
         height: 15vh;
         display: flex;
         justify-content: space-between;
       }
 
       .cell {
-        width: 18vw;
+        width: 22vw;
         height: 15vh;
         float: left;
         border: 1px solid black;
@@ -181,7 +181,9 @@
     });
 
     function mv() {
-      $("#adown").trigger("play");
+      var audio = $("#adown")[0];
+      audio.currentTime = 0;
+      audio.play();
       crow();
       drow();
       judge($(this));
@@ -189,7 +191,7 @@
 
     function init() {
       $("#container").empty();
-      for (var i = 0; i < 6; i++) {
+      for (var i = 0; i < 5; i++) {
         crow();
       }
       seconds = 20;
@@ -234,7 +236,7 @@
       var row = cdiv("row");
       var classes = createSn();
 
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < 4; i++) {
         row.append(cdiv(classes[i]));
       }
       con.prepend(row);
@@ -244,7 +246,7 @@
     function drow() {
       var con = $("#container");
       console.log(con.children().length);
-      if (con.children().length > 7) {
+      if (con.children().length > 6) {
         $("#container").find(".row:last-child").remove();
       }
     }
@@ -256,8 +258,8 @@
     }
 
     function createSn() {
-      var arr = ["cell", "cell", "cell", "cell", "cell"];
-      var i = Math.floor(Math.random() * 5);
+      var arr = ["cell", "cell", "cell", "cell"];
+      var i = Math.floor(Math.random() * 4);
       arr[i] = "cell black";
       return arr;
     }
