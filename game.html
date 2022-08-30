@@ -181,12 +181,12 @@
     });
 
     function mv() {
-      var audio = $("#adown")[0];
-      audio.currentTime = 0;
-      audio.play();
       crow();
       drow();
       judge($(this));
+      var audio = $("#adown")[0];
+      audio.currentTime = 0;
+      audio.play();
     }
 
     function init() {
