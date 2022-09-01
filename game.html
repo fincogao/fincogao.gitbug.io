@@ -105,6 +105,7 @@
       </h1>
       <div class="btn white" id="start">点击开始</div>
       <div class="btn white" id="type">计时模式</div>
+      <div class="btn white" id="music">打开音效</div>
       <div class="btn white" id="home">返回主页</div>
     </div>
     <audio id="adown" src="public/audio/鸡.mp3" hidden></audio>
@@ -147,6 +148,7 @@
     var score = 0;
     var timer;
     var type = "time";
+    var music = true;
 
     $("#start").click(function () {
       init();
@@ -176,17 +178,33 @@
       }
     });
 
+    $("#music").click(function () {
+      if (music) {
+        $("#music").html("关闭音效");
+        music = false;
+      } else {
+        $("#music").html("打开音效");
+        music = true;
+      }
+    });
+
     $("#home").click(function () {
       window.location = "index.html";
     });
 
     function mv() {
+      console.log(Date.now());
       crow();
+      console.log(Date.now());
       drow();
+      console.log(Date.now());
       judge($(this));
-      var audio = $("#adown")[0];
-      audio.currentTime = 0;
-      audio.play();
+      console.log(Date.now());
+      if (music) {
+        var audio = $("#adown")[0];
+        audio.currentTime = 0;
+        audio.play();
+      }
     }
 
     function init() {
@@ -201,7 +219,10 @@
     }
 
     function end() {
-      $("#aend").trigger("play");
+      if (music) {
+        $("#aend").trigger("play");
+      }
+      $(".cell").unbind();
       $("#final_display").show();
       $("#popup").show();
       clearInterval(timer);
