@@ -1,23 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="icon" type="image/svg+xml" href="./favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="鸡了个鸡 坤了个坤" />
-        <title>鸡了个鸡 坤了个坤</title>
-        <script
-            type="module"
-            crossorigin
-            src="./assets/index.759e6831.js"
-        ></script>
-        <link rel="stylesheet" href="./assets/index.9bed79d9.css" />
-    </head>
-    <body>
-        <div id="root"></div>
-        <script>
-            // vite没有global，手动声明
-            var global = global || window;
-        </script>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="鸡了个鸡 坤了个坤" />
+    <title>鸡了个鸡 坤了个坤</title>
+    <script>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?3db8c73595fdc893087a4de7e8f0e34e";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+    <script type="module" crossorigin src="./assets/index.759e6831.js"></script>
+    <link rel="stylesheet" href="./assets/index.9bed79d9.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // vite没有global，手动声明
+      var global = global || window;
+    </script>
+    <div class="container" style="margin-top: 100px">
+      <div id="disqus_thread"></div>
+      <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
+        (function () {
+          // DON'T EDIT BELOW THIS LINE
+          var d = document,
+            s = d.createElement("script");
+          s.src = "https://ikun-life.disqus.com/embed.js";
+          s.setAttribute("data-timestamp", +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+      <noscript
+        >Please enable JavaScript to view the
+        <a href="https://disqus.com/?ref_noscript"
+          >comments powered by Disqus.</a
+        ></noscript
+      >
+    </div>
+  </body>
 </html>
