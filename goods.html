@@ -19,7 +19,7 @@
       crossorigin="anonymous"
     />
     <script type="text/javascript" src="constant/avatarnames.js"></script>
-    <title>鸡音盒-鸡乐盒-别踩鸡块-iOS-网页版-鸡了个鸡-坤了个坤-头像</title>
+    <title>鸡音盒-鸡乐盒-别踩鸡块-iOS-网页版-鸡了个鸡-坤了个坤-ikun周边</title>
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -53,10 +53,10 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="public/img/s4.jpg" class="d-block w-100" alt="..." />
+            <img src="public/img/s6.jpg" class="d-block w-100" alt="..." />
           </div>
           <div class="carousel-item">
-            <img src="public/img/b3.jpg" class="d-block w-100" alt="..." />
+            <img src="public/img/b7.jpg" class="d-block w-100" alt="..." />
           </div>
         </div>
       </div>
@@ -128,13 +128,13 @@
       }
 
       console.log(avatarnames.length);
-      for (let i = 0; i < avatarnames.length; i++) {
-        let file = avatarnames[i];
+      for (let i = 0; i < 11; i++) {
+        let file = i + ".PNG";
         var btns = document.getElementById("btns");
         var input = document.createElement("div");
-        input.setAttribute("class", "col-4");
+        input.setAttribute("class", "col-6");
         var html =
-          '<img src="public/avatar/' + file + '" class="d-block w-100"/>';
+          '<img src="public/goods/' + file + '" class="d-block w-100"/>';
         input.innerHTML = html;
         btns.appendChild(input);
       }
